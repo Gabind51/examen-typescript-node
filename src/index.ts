@@ -6,7 +6,13 @@ type person = {
 }
 function getStatistics() : { meanAge: number, meanHeight: number } {
   const persons : person[] = JSON.parse(readFileSync("./persons.json").toString());
-  return persons.reduce((max, person) => (person.age > max ? person.age : max), persons[0].age)
+  const totalAges : number = persons.reduce((sum, person) => sum + person.age, 0)
+  const totalHeights: number = persons.reduce((sum, person) => sum + person.height, 0)
+  const meanAge: number = totalAges / persons.length
+  const meanHeight: number = totalHeights / persons.length
+
+  return {
+    meanAge, meanHeight}
 }
 
 function displayResult() {
