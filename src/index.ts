@@ -6,6 +6,7 @@ type person = {
 }
 function getStatistics() : number {
   const persons : person[] = JSON.parse(readFileSync("./persons.json").toString());
+  return persons.reduce((max, person) => (person.age > max ? person.age : max), persons[0].age)
 }
 
 function displayResult() {
